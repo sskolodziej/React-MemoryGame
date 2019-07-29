@@ -13,14 +13,12 @@ class Card extends Component {
     }
 
     handleCardClick = () => {
-        debugger;
         this.setState(prevState => ({
             flipped: !prevState.flipped
         }));
     }
 
     createCard() {
-        debugger;
         const frontSide = this.state.flipped;
 
         if (!frontSide)

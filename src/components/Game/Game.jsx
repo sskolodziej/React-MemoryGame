@@ -48,7 +48,6 @@ class Game extends Component {
     ]
 
     initDoubledArray(animals) {
-        debugger;
         let doubledAnimals = [];
         animals.forEach(animal => {
             for (var i = 0; i < 2; i++) {
@@ -66,7 +65,6 @@ class Game extends Component {
     }
 
     shuffle(array) {
-        debugger;
         var currentIndex = array.length, temporaryValue, randomIndex;
 
         for (var i = 0; i < 2; i++) {
