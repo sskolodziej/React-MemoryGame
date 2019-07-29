@@ -79,7 +79,6 @@ class Game extends Component {
                 array[randomIndex] = temporaryValue;
             }
         }
-
         return array;
     }
 
