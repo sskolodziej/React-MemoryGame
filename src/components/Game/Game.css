@@ -1,0 +1,26 @@
+::selection {
+    background: rgb(219, 217, 217);
+}
+
+.gameboard {
+    margin: 0 auto;
+    width: 450px;
+}
+
+.header {
+    padding: 20px;
+
+    text-align: center;
+}
+
+.title {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.instruction {
+    padding-top: 10px;
+
+    font-size: 18px;
+    font-weight: 500;
+}
