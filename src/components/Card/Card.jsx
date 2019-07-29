@@ -8,7 +8,6 @@ class Card extends Component {
         this.state = {
             card: this.props.card,
             flipped: this.props.card.flipped,
-            cardClick: this.props.cardClick,
         }
     }
 
