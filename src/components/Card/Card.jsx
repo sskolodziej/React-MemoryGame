@@ -3,36 +3,35 @@ import React, {Component} from 'react';
 import './Card.css'
 
 class Card extends Component {
+    card = null;
+
     constructor(props) {
         super(props);
         this.state = {
             card: this.props.card,
-            flipped: this.props.card.flipped,
         }
+        this.card = this.props.card;
     }
 
     handleCardClick = () => {
         this.setState(prevState => ({
-            flipped: !prevState.flipped
+            card: this.card
         }));
+        this.props.cardClick(this.card);
     }
 
     createCard() {
-        const frontSide = this.state.flipped;
+        const frontSide = this.state.card.flipped || this.state.card.guessed;
 
         if (!frontSide)
             return (
                 <div className="card back" onClick={this.handleCardClick}>
                     {this.state.card.back}
-                    {console.log(this)}
                 </div>
             )
         else {
             return (
-                <div className={"card " + this.state.card.name} onClick={this.handleCardClick}>
-                    {/* <div className={this.state.card.name}>
-                        {this.state.card.name}
-                    </div> */}
+                <div className={"card " + this.state.card.name + (this.state.card.guessed ? " guessed" : "")}>
                     <img src={this.state.card.front} alt={this.state.card.name + " icon"} />
                 </div>
             )

@@ -11,10 +11,17 @@ class CardContainer extends Component {
         }
     }
 
+    onCardClick = (card) => {
+        this.props.cardClick(card);
+    }
+
     createCards() {
-        return this.state.cards.map(allProperies => {
+        return this.state.cards.map(card => {
             return(
-                <Card card={allProperies}/>
+                <Card 
+                    card={card} 
+                    cardClick={this.onCardClick}
+                />
             );
         });        
     }

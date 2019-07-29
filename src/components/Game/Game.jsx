@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import CardContainer from '../CardContainer/CardContainer';
 
 import './Game.css'
@@ -8,7 +8,8 @@ class Game extends Component {
         super(props);
 
         this.state = {
-            cards: this.shuffle(this.initDoubledArray(this.animals))
+            cards: this.shuffle(this.initDoubledArray(this.animals)),
+            counterValue: 0,
         }
     }
 
@@ -48,20 +49,18 @@ class Game extends Component {
     ]
 
     initDoubledArray(animals) {
-        let doubledAnimals = [];
-        animals.forEach(animal => {
-            for (var i = 0; i < 2; i++) {
-                doubledAnimals.push(
-                    {
-                        name: animal.name,
-                        front: animal.front,
-                        back: "?",
-                        guessed: false,
-                        flipped: false,
-                    });
-            }
-        });
-        return doubledAnimals;
+        let fullAnimal = animals.map(animal => ({
+            name: animal.name,
+            front: animal.front,
+            back: "?",
+            guessed: false,
+            flipped: false,
+        }));
+
+        return [...fullAnimal, ...fullAnimal]
+            .map((card, index) => {
+                return { ...card, ...{ id: index } };
+            });
     }
 
     shuffle(array) {
@@ -80,14 +79,70 @@ class Game extends Component {
         return array;
     }
 
+    onCardClick = (card) => {
+        this.counter();
+
+        if (this.blockedNextClicks) {
+            return;
+        }
+
+        card.flipped = true;
+
+        if (!this.currentOpenedCard) {
+            this.currentOpenedCard = card;
+        } else {
+            this.blockedNextClicks = true;
+            this.secondOpenedCard = card;
+
+            if (this.currentOpenedCard.name == this.secondOpenedCard.name) {
+                this.currentOpenedCard.guessed = true;
+                this.secondOpenedCard.guessed = true;
+            }
+
+            setTimeout(() => {
+                this.currentOpenedCard.flipped = false;
+                this.secondOpenedCard.flipped = false;
+
+                this.currentOpenedCard = null;
+                this.secondOpenedCard = null;
+                this.refresh();
+                this.blockedNextClicks = false;
+            }, card.guessed ? 0 : 500)
+        }
+    }
+
+    counter = () => {
+        this.setState(prevState => ({
+            counterValue: this.state.counterValue + 1
+        }));
+    }
+
+    refresh = () => {
+        this.setState(prevState => ({
+            cards: this.state.cards
+        }))
+    }
+
+    refreshWholePage = () => {
+        window.location.reload();
+    }
+
     render() {
         return (
             <div className="gameboard">
                 <div className="header">
                     <div className="title">Memory Game</div>
                     <div className="instruction">Pair the cards</div>
+                    <span>Number of moves: {this.state.counterValue}</span>
                 </div>
-                <CardContainer cards={this.state.cards} />
+                <CardContainer
+                    cards={this.state.cards}
+                    cardClick={this.onCardClick}
+                />
+                <div className="buttons">
+                    {/* <button className="light">Light mode on</button> */}
+                    <button className="light" onClick={this.refreshWholePage}>Let's start again</button>
+                </div>
             </div>
         );
     }
