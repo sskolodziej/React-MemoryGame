@@ -14,9 +14,9 @@ class Card extends Component {
     }
 
     handleCardClick = () => {
-        this.setState(prevState => ({
+        this.setState({
             card: this.card
-        }));
+        });
         this.props.cardClick(this.card);
     }
 

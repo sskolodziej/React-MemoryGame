@@ -11,6 +11,7 @@ class Game extends Component {
             cards: this.shuffle(this.initDoubledArray(this.animals)),
             counterValue: 0,
             defaultLightMode: true,
+            // cardsRefreshed: this.shuffle(this.initDoubledArray(this.animals)),
         }
     }
 
@@ -107,27 +108,37 @@ class Game extends Component {
                 this.currentOpenedCard = null;
                 this.secondOpenedCard = null;
                 this.refresh();
+                
                 this.blockedNextClicks = false;
             }, card.guessed ? 0 : 500)
         }
     }
 
     refresh = () => {
-        this.setState(prevState => ({
+        this.setState({
             cards: this.state.cards
-        }))
+        })
     }
 
     counter = () => {
         this.setState(prevState => ({
-            counterValue: this.state.counterValue + 1
+            counterValue: prevState.counterValue + 1
         }));
     }
 
     refreshWholePage = () => {
-        debugger;
         window.location.reload();
     }
+
+    // refreshWholePage = () => {
+    //     console.log(this.state.cards)
+    //     console.log(this.state.cardsRefreshed)
+    //     this.setState(prevState => ({
+    //         counterValue: 0,
+    //         cards: prevState.cardsRefreshed,
+    //     }))
+    //     console.log(this.state.cards)
+    // }
 
     changeMode = () => {
         this.setState(prevState => ({
