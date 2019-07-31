@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import './Card.css'
 
@@ -10,14 +10,13 @@ class Card extends Component {
         this.state = {
             card: this.props.card,
         }
-        this.card = this.props.card;
     }
 
     handleCardClick = () => {
         this.setState({
-            card: this.card
+            card: this.state.card
         });
-        this.props.cardClick(this.card);
+        this.props.cardClick(this.state.card);
     }
 
     createCard() {
@@ -36,6 +35,14 @@ class Card extends Component {
                 </div>
             )
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.card !== nextProps.card) {
+            this.setState({
+                card: nextProps.card
+            });
+        }
     }
 
     render() {

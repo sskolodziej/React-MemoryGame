@@ -26,6 +26,14 @@ class CardContainer extends Component {
         });        
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.props.cards !== nextProps.cards) {
+          this.setState({
+            cards: nextProps.cards
+          });
+        }
+      }
+
     render() {
         return(
             <div className="card-container">

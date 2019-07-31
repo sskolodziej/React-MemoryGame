@@ -58,6 +58,8 @@ span {
     display: flex;
     justify-content: space-around;
     align-content: center;
+
+    user-select: none;
 }
 
 button {

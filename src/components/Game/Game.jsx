@@ -11,7 +11,6 @@ class Game extends Component {
             cards: this.shuffle(this.initDoubledArray(this.animals)),
             counterValue: 0,
             defaultLightMode: true,
-            // cardsRefreshed: this.shuffle(this.initDoubledArray(this.animals)),
         }
     }
 
@@ -108,7 +107,7 @@ class Game extends Component {
                 this.currentOpenedCard = null;
                 this.secondOpenedCard = null;
                 this.refresh();
-                
+
                 this.blockedNextClicks = false;
             }, card.guessed ? 0 : 500)
         }
@@ -126,24 +125,17 @@ class Game extends Component {
         }));
     }
 
-    refreshWholePage = () => {
-        window.location.reload();
-    }
-
-    // refreshWholePage = () => {
-    //     console.log(this.state.cards)
-    //     console.log(this.state.cardsRefreshed)
-    //     this.setState(prevState => ({
-    //         counterValue: 0,
-    //         cards: prevState.cardsRefreshed,
-    //     }))
-    //     console.log(this.state.cards)
-    // }
-
     changeMode = () => {
         this.setState(prevState => ({
             defaultLightMode: !prevState.defaultLightMode
         }))
+    }
+
+    startAgain = () => {
+        this.setState({
+            counterValue: 0,
+            cards: this.shuffle(this.initDoubledArray(this.animals)),
+        })
     }
 
     render() {
@@ -164,7 +156,7 @@ class Game extends Component {
                     />
                     <div className="buttons">
                         <button className={modeClassName} onClick={this.changeMode}>{buttonModeText}</button>
-                        <button className={modeClassName} onClick={this.refreshWholePage}>Let's start again</button>
+                        <button className={modeClassName} onClick={this.startAgain}>Let's start again</button>
                     </div>
                 </div>
             </div>
