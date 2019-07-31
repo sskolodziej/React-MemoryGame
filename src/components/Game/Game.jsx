@@ -10,6 +10,7 @@ class Game extends Component {
         this.state = {
             cards: this.shuffle(this.initDoubledArray(this.animals)),
             counterValue: 0,
+            defaultLightMode: true,
         }
     }
 
@@ -111,37 +112,49 @@ class Game extends Component {
         }
     }
 
-    counter = () => {
-        this.setState(prevState => ({
-            counterValue: this.state.counterValue + 1
-        }));
-    }
-
     refresh = () => {
         this.setState(prevState => ({
             cards: this.state.cards
         }))
     }
 
+    counter = () => {
+        this.setState(prevState => ({
+            counterValue: this.state.counterValue + 1
+        }));
+    }
+
     refreshWholePage = () => {
+        debugger;
         window.location.reload();
     }
 
+    changeMode = () => {
+        this.setState(prevState => ({
+            defaultLightMode: !prevState.defaultLightMode
+        }))
+    }
+
     render() {
+        let modeClassName = this.state.defaultLightMode ? "light" : "dark";
+        let buttonModeText = this.state.defaultLightMode ? "Light mode: on" : "Light mode: off";
+
         return (
-            <div className="gameboard">
-                <div className="header">
-                    <div className="title">Memory Game</div>
-                    <div className="instruction">Pair the cards</div>
-                    <span>Number of moves: {this.state.counterValue}</span>
-                </div>
-                <CardContainer
-                    cards={this.state.cards}
-                    cardClick={this.onCardClick}
-                />
-                <div className="buttons">
-                    {/* <button className="light">Light mode on</button> */}
-                    <button className="light" onClick={this.refreshWholePage}>Let's start again</button>
+            <div className={"game-view " + modeClassName}>
+                <div className="gameboard">
+                    <div className="header">
+                        <div className="title">Memory Game</div>
+                        <div className="instruction">Pair the cards</div>
+                        <span>Number of moves: {this.state.counterValue}</span>
+                    </div>
+                    <CardContainer
+                        cards={this.state.cards}
+                        cardClick={this.onCardClick}
+                    />
+                    <div className="buttons">
+                        <button className={modeClassName} onClick={this.changeMode}>{buttonModeText}</button>
+                        <button className={modeClassName} onClick={this.refreshWholePage}>Let's start again</button>
+                    </div>
                 </div>
             </div>
         );

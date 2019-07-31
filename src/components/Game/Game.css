@@ -1,16 +1,41 @@
+.game-view {
+    height: 100vh;
+}
+
+.light {
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+
+    transition: 1s;
+}
+
+.dark {
+    background: rgb(24, 24, 24);
+    color: rgb(255, 255, 255);
+
+    transition: 1s;
+}
+
 ::selection {
     background: rgb(219, 217, 217);
 }
 
 .gameboard {
     margin: 0 auto;
-    width: 390px;
+    width: 100%;
 
     text-align: center;
 }
 
+@media screen and (min-width: 390px) {
+    .gameboard {
+        width: 390px;
+    }
+}
+
 .header {
-    padding: 20px;
+    padding: 20px 0;
+    /* width: 100%; */
 }
 
 .title {
@@ -36,24 +61,19 @@ span {
 }
 
 button {
-    margin: 10px 0;
+    margin: 5px 0;
     border: 0;
     border-bottom: 10px solid transparent;
 
     font-family: "Segoe UI", sans-serif;
     font-size: 16px;
     font-weight: 600;
+
+    transition: 1.5s;
 }
 
 button:hover {
     cursor: pointer;
-}
 
-.light {
-    background: rgb(255, 255, 255);
-    transition: 1.5s;
-}
-
-.light:hover {
     border-bottom: 10px solid rgb(219, 217, 217);
 }

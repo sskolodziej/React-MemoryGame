@@ -7,12 +7,19 @@
     border-radius: 20%;
     margin-bottom: 10px;
     padding: 5px 0;
-    width: 85px;
-    height: 85px;
+    width: 22vw;
+    height: 22vw;
 
     background: rgb(219, 217, 217);
 
     user-select: none;
+}
+
+@media screen and (min-width: 390px) {
+    .card {
+        width: 85px;
+        height: 85px;
+    }
 }
 
 .card:hover {
@@ -72,6 +79,11 @@ img {
 }
 
 @keyframes FadingAnimation {
-    0% {opacity: 1;}
-    100% {opacity: 0.3;}
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
 }
